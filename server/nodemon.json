@@ -1,0 +1,9 @@
+{
+  "execMap": {
+    "js": "babel-node"
+  },
+  "ignore": ["node_modules/"],
+  "watch": ["."],
+  "ext": "js json"
+}
+  
