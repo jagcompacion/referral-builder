@@ -5,11 +5,14 @@ import bodyParser from "body-parser";
 import referralRoutes from "./routes/referralRoutes";
 import mongoose from "mongoose";
 import { config } from "dotenv";
+import cors from "cors";
 
 config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

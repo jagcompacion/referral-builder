@@ -11,8 +11,16 @@ const getAllReferrals = async (req, res) => {
 
 const createReferral = async (req, res) => {
   const newReferral = new Referral({
-    name: req.body.name,
+    givenName: req.body.givenName,
+    surName: req.body.surName,
+    phone: req.body.phone,
     email: req.body.email,
+    homeName: req.body.homeName,
+    street: req.body.street,
+    suburb: req.body.suburb,
+    state: req.body.state,
+    postCode: req.body.postCode,
+    country: req.body.country,
   });
 
   try {
@@ -23,7 +31,39 @@ const createReferral = async (req, res) => {
   }
 };
 
+const updateReferral = async (req, res) => {
+  try {
+    const savedReferral = await Referral.findByIdAndUpdate(req.params.id, {
+      givenName: req.body.givenName,
+      surName: req.body.surName,
+      phone: req.body.phone,
+      email: req.body.email,
+      homeName: req.body.homeName,
+      street: req.body.street,
+      suburb: req.body.suburb,
+      state: req.body.state,
+      postCode: req.body.postCode,
+      country: req.body.country,
+    });
+    res.status(200).json(savedReferral);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+const deleteReferral = async (req, res) => {
+  console.log(req.params.id);
+  try {
+    await Referral.findByIdAndDelete(req.params.id);
+    res.status(200).send("deleted");
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 export default {
   getAllReferrals,
   createReferral,
+  updateReferral,
+  deleteReferral,
 };
