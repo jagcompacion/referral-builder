@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 type ReferralFormProps = {
   isLoading: boolean;
-  defaultValues: Referral;
+  defaultValues: Referral | {};
   onSubmit: (data: Referral, reset: (data: Referral) => void) => void;
   onInputChange: (data: Referral) => void;
 };

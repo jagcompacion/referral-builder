@@ -4,11 +4,27 @@ import Referral from "@/types/Referral";
 
 type ReferralsState = {
   data: Referral[];
+  input: Referral | {};
   isLoading: boolean;
+};
+
+export const defaultReferralInput: Referral = {
+  _id: "temp",
+  givenName: "",
+  surName: "",
+  email: "",
+  phone: "",
+  homeName: "",
+  street: "",
+  suburb: "",
+  state: "",
+  postCode: "",
+  country: "",
 };
 
 const initialState: ReferralsState = {
   data: [],
+  input: defaultReferralInput,
   isLoading: false,
 };
 
@@ -56,6 +72,12 @@ const referralsSlice = createSlice({
   name: "referrals",
   initialState,
   reducers: {
+    resetReferralInput: (state) => {
+      state.input = defaultReferralInput;
+    },
+    setReferralInput: (state, action) => {
+      state.input = action.payload;
+    },
     setReferral: (state, action) => {
       const { _id } = action.payload;
       const referralsState = state.data;
@@ -123,6 +145,11 @@ const referralsSlice = createSlice({
   },
 });
 
-export const { setReferral, removeTempReferral } = referralsSlice.actions;
+export const {
+  setReferral,
+  removeTempReferral,
+  setReferralInput,
+  resetReferralInput,
+} = referralsSlice.actions;
 
 export default referralsSlice;
